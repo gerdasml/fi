@@ -9,4 +9,5 @@ endIndex = interval:length(data.high);
 wmaData = weightedMovingAverage(startIndex, endIndex, interval, data);
 lrData = linearRegression(startIndex, endIndex, interval, data);
 
-graphic(datenum(wmaData.dateTime), wmaData.wma, lrData.y, dayData, interval);
+bs = buySell(wmaData.wma, lrData.y, 1, size(wmaData.wma, 2));
+graphic(datenum(wmaData.dateTime), wmaData.wma, lrData.y, dayData, interval, bs.values);
