@@ -9,7 +9,7 @@ function plotas(data, type, x, y, name, from, to, interval)
        timeFormat = 'HH:MM';
     end
     if strcmp('day', type)
-        timeFormat = 'yyyy-mm-dd';
+        timeFormat = 'mm-yyyy';
     end
     % cia yra surandamos datos is duomenu tarp pateikto vartotojo laiko
     % intervalo
@@ -24,7 +24,7 @@ function plotas(data, type, x, y, name, from, to, interval)
     %(interval+1:end) - atkertam pirmus interval dydzio elementus
     % nupiesiamas candle bar. Reikia prirasyt ', nes candle reikalauja
     % stulpeliniu vektoriu
-    candle(filterData.high(interval:end)', filterData.low(interval:end)', filterData.close(interval:end)', filterData.open(interval:end)', 'red', filterData.dateTime(interval:end)', timeFormat);
+    candle(filterData.high((interval+1):end)', filterData.low((interval+1):end)', filterData.close((interval+1):end)', filterData.open((interval+1):end)', 'k', datenum(filterData.dateTime((interval+1):end)'), timeFormat);
     % uzdedam asiu pavadinimus ir grafiko pavadinima
     title(name);
     ylabel(y);

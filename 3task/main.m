@@ -9,4 +9,4 @@ endIndex = interval:length(data.high);
 wmaData = weightedMovingAverage(startIndex, endIndex, interval, data);
 lrData = linearRegression(startIndex, endIndex, interval, data);
 
-plotTwoGraphs(data.dateTime, wmaData.wma, lrData.y, data, interval);
+graphic(datenum(wmaData.dateTime), wmaData.wma, lrData.y, dayData, interval);
