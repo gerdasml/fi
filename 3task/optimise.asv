@@ -1,0 +1,28 @@
+function optimise(data, money, taxes)
+    sharpeRatio = @(profit) (mean(profit)*252) ./ (std(profit) * sqrt(252));
+    bestProfit = [];
+    bestSr = 0;
+    best_pair = [];
+    for wmaInterval = 1:50
+        for lrInterval = 1:50            
+            startIndexWma = 1:(length(data.high)-wmaInterval);
+            endIndexWma = wmaInterval:length(data.high);
+            
+            startIndexLr = 1:(length(data.high)-lrInterval);
+            endIndexLr = lrInterval:length(data.high);
+            
+            wmaData = weightedMovingAverage(startIndexWma, endIndexWma, wmaInterval, data);  
+            lrData = linearRegression(startIndexLr, endIndexLr, lrInterval, data);
+
+            bs = buySell(wmaData.wma, lrData.y, data, 1, size(wmaData.wma, 2), money, taxes);
+            prof = bs.profitPercentage;
+            sr = sharpeRatio(prof);
+            
+            if(sr > bestSr)
+                bestSr = sr;
+                bestProfit = [prof;
+                
+            end
+        end
+    end
+end
