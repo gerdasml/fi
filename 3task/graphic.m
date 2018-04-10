@@ -8,6 +8,7 @@ function graphic(xx, y1, y2, dayData, interval, bs, name, xx2, bs2)
     h(1) = plot(xx, y1, 'm', 'DisplayName', 'WMA indicator');
     hold on;
     h(2) = plot(xx, y2, 'b', 'DisplayName', 'LR indicator');
+    %iteracijos metu yra pildomas grafikas pirkimo/pardavimo masyvo taskais
     for i=1:size(y1, 2)
         if(bs.values(i) == 1)
             hold on;
@@ -25,10 +26,15 @@ function graphic(xx, y1, y2, dayData, interval, bs, name, xx2, bs2)
     legend(h(1:end), 'Location','northwest');
     axis tight;
     
+    %grafikas, rodantis pelno kitima
     h2 = subplot(7,1,[6 7]);
+    %jeigu main'e buvo paduota dviem parametrais maziau, tai tada
+    %neoptimizuotas sprendimo budas ir reikia vaizduot taip
     if ~exist('xx2', 'var') && ~exist('bs2', 'var')
         plot(xx, bs.profit);
-    elseif size(xx, 2) > size(xx2, 2)
+    %kitu atveju vaizduoti taip, apkarpant masyvo dydzius, kad butu galima
+    %graziai atvaizduoti
+    elseif size(xx, 2) >= size(xx2, 2)
         start = (abs(size(xx,2) - size(xx2, 2))+1);
         plot(xx(start:end), bs.profit(start:end), xx2, bs2.profit);
         legend('Optimized profit', 'Not optimized profit', 'Location', 'southeast');

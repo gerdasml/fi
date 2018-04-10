@@ -7,7 +7,6 @@ data = createStruct(dayData, 'day');
 money = 1000;
 taxes = 0.02;
 percentage = 1.2;
-
 interval = 9;
 
 startIndex = 1:(length(data.high)-interval);
