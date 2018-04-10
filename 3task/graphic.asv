@@ -1,9 +1,10 @@
 function graphic(xx, y1, y2, dayData, interval, bs, name, xx2, bs2)
     figure('Name',name);
     h1 = subplot(7, 1, [1 4]); 
-    plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Intc 500 dienu duomenys nuo 2013-01-02', datetime(2013, 1, 2), datetime(2013, 1, 2) + caldays(500), interval);
-    %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Tesla 500 dienu duomenys nuo 2015-09-01', datetime(2015, 9, 1), datetime(2015, 9, 1) + caldays(500), interval);
+    %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Intc 500 dienu duomenys nuo 2013-01-02', datetime(2013, 1, 2), datetime(2013, 1, 2) + caldays(500), interval);
+    plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Tesla 500 dienu duomenys nuo 2015-09-01', datetime(2015, 9, 1), datetime(2015, 9, 1) + caldays(500), interval);
     %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Apple 500 dienu duomenys nuo 2013-10-01', datetime(2013, 10, 1), datetime(2013, 10, 1) + caldays(500), interval);
+    %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Apple 500 dienu duomenys nuo 2016-04-08', datetime(2016, 4, 8), datetime(2016, 4, 8) + caldays(500), interval);
     hold on;
     h(1) = plot(xx, y1, 'm', 'DisplayName', 'WMA indicator');
     hold on;
@@ -32,6 +33,8 @@ function graphic(xx, y1, y2, dayData, interval, bs, name, xx2, bs2)
         start = (abs(size(xx,2) - size(xx2, 2))+1);
         plot(xx(start:end), bs.profit(start:end), xx2, bs2.profit);
         legend('Optimized profit', 'Not optimized profit', 'Location', 'southeast');
+        minLim = min(
+        ylim([minLim maxLim]);
     else
         start = (abs(size(xx2,2) - size(xx, 2))+1);
         plot(xx, bs.profit, xx2(start:end), bs2.profit(start:end));

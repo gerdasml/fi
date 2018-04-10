@@ -1,4 +1,4 @@
-function [hasCollapsed] =  buySell(data1, data2, data, startIndex, endIndex, money, taxes, per)
+function [hasCollapsed] =  buySell(data1, data2, data, startIndex, endIndex, money, taxes, percentage)
     hasCollapsed.values(startIndex:endIndex) = 0;
     hasCollapsed.money = money;
     hasCollapsed.shares = 0;

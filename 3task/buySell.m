@@ -11,7 +11,7 @@ function [hasCollapsed] =  buySell(data1, data2, data, startIndex, endIndex, mon
         if((checkIfLoss(data.close, hasCollapsed.buyIndex, hasCollapsed.sellIndex, i, percentage) == 2))
             if(hasCollapsed.shares <= 0) 
                 hasCollapsed.profit(i) = hasCollapsed.money + (hasCollapsed.shares * price) - money;
-                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money) / money;
+                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money - hasCollapsed.profit(i-1)) / money;
                 continue;
             end
             hasCollapsed.money = hasCollapsed.money + (sub * price) - (sub * taxes);
@@ -21,7 +21,7 @@ function [hasCollapsed] =  buySell(data1, data2, data, startIndex, endIndex, mon
         elseif(checkIfCollapsed(data1, data2, i) == 1) 
             if(hasCollapsed.money <= 0)
                 hasCollapsed.profit(i) = hasCollapsed.money + (hasCollapsed.shares * price);
-                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price)) / money;
+                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price)- hasCollapsed.profit(i-1)) / money;
                 continue;
             end
             hasCollapsed.money = hasCollapsed.money - (sub * price) - (sub * taxes);
@@ -31,17 +31,17 @@ function [hasCollapsed] =  buySell(data1, data2, data, startIndex, endIndex, mon
         elseif(checkIfCollapsed(data1, data2, i) == -1) 
             if(hasCollapsed.shares <= 0) 
                 hasCollapsed.profit(i) = hasCollapsed.money + (hasCollapsed.shares * price) - money;
-                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money) / money;
+                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money - hasCollapsed.profit(i-1)) / money;
                 continue;
             end
             if(hasCollapsed.buyIndex == 0)
                 hasCollapsed.profit(i) = hasCollapsed.money + (hasCollapsed.shares * price);
-                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price)) / money;
+                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - hasCollapsed.profit(i-1)) / money;
                 continue;
             end
             if(hasCollapsed.sellIndex > hasCollapsed.buyIndex)
                 hasCollapsed.profit(i) = hasCollapsed.money + (hasCollapsed.shares * price) - money;
-                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money) / money;
+                hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money - hasCollapsed.profit(i-1)) / money;
                 continue;
             end
             hasCollapsed.money = hasCollapsed.money + (sub * price) - (sub * taxes);
@@ -50,6 +50,6 @@ function [hasCollapsed] =  buySell(data1, data2, data, startIndex, endIndex, mon
             hasCollapsed.sellIndex = i;
         end
         hasCollapsed.profit(i) = hasCollapsed.money + (hasCollapsed.shares * price) - money;
-        hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money)/ money;
+        hasCollapsed.profitPercentage(i) = (hasCollapsed.money + (hasCollapsed.shares * price) - money - hasCollapsed.profit(i-1))/ money;
     end
 end

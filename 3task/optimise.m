@@ -3,7 +3,7 @@ function optimise(data, money, taxes)
     best.sr = 0;
     best.profit = 0;
     for interval = 1:20
-        for percentage = 1:0.05:2            
+        for percentage = 1:0.05:1.5            
             startIndex = 1:(length(data.high)-interval);
             endIndex = interval:length(data.high);
             
