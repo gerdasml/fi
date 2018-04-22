@@ -1,8 +1,10 @@
 function [data] = createStruct(d, type)
-    from = datetime(2013,01,02);
+    from = datetime(2007,04,02);
+    %from = datetime(2013,01,02);
     %from = datetime(2015,09,01);
     %from = datetime(2013,10,01);
-    to = from + caldays(500);
+    %to = from + caldays(500);
+    to = from + caldays(2000);
     tf = find(isbetween(d.dateTime, from, to));
     data.dateTime = d.dateTime(tf);
     data.high = d.high(tf);

@@ -1,7 +1,8 @@
 function graphic(xx, y1, y2, dayData, interval, bs, name, xx2, bs2)
     figure('Name',name);
     h1 = subplot(7, 1, [1 4]); 
-    plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Intc 500 dienu duomenys nuo 2013-01-02', datetime(2013, 1, 2), datetime(2013, 1, 2) + caldays(500), interval);
+    plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Apple 10 metu duomenys nuo 2007-04-02', datetime(2007, 4, 2), datetime(2007, 4, 2) + caldays(2000), interval);
+    %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Intc 500 dienu duomenys nuo 2013-01-02', datetime(2013, 1, 2), datetime(2013, 1, 2) + caldays(500), interval);
     %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Tesla 500 dienu duomenys nuo 2015-09-01', datetime(2015, 9, 1), datetime(2015, 9, 1) + caldays(500), interval);
     %plotas(dayData, 'day', 'Laikas', 'Akciju verte', 'Apple 500 dienu duomenys nuo 2013-10-01', datetime(2013, 10, 1), datetime(2013, 10, 1) + caldays(500), interval);
     hold on;
