@@ -3,7 +3,7 @@ function [matrix] = correlation(data)
     for i = 1:size(data, 2)
         for j = i:size(data,2)
             %paskaiciuojama koreliacijos matrica
-            M = corrcoef(data(i).profit, data(j).profit);
+            M = corrcoef(data(i).profitPercentage, data(j).profitPercentage);
             %pasiimam koeficienta
             cof = M(1,2);
             %irasom i atitinkamus matricos laukelius

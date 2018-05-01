@@ -9,5 +9,4 @@ function matrixPlot(modifiedData, files)
     t = uitable(uf,'Data', matrix,'Position',[20 20 700 300]);
     t.ColumnName = names;
     t.RowName = names;
-    display(matrix);
 end

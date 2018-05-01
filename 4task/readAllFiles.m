@@ -25,6 +25,7 @@ function [bs] = readAllFiles(directory, money, taxes)
         bs = buySell(wmaData.wma, lrData.y, data, 1, size(wmaData.wma, 2), money, taxes, percentage);
         op(i).date = wmaData.dateTime;
         op(i).profit = bs.profit;
+        op(i).holdProfit = bs.holdProfit;
         
         %nupiesiam kiekvienos imones gauta pelna
         subGraphic(files, i, wmaData, op);
@@ -32,13 +33,18 @@ function [bs] = readAllFiles(directory, money, taxes)
     %answer yra pelnas, o modifiedData, tai sutvarkyti kiekvienos imones
     %pelno duomenys isimant tarpus
     [answer, modifiedData] = combineData(op, size(files,1));
+    for i = 1:size(files,1)
+        totalMoney = modifiedData(i).profit + money;
+        modifiedData(i).profitPercentage = diff(totalMoney) ./ totalMoney(1:end-1);
+        
+    end
     
     %nupiesiam bendra portfelio pelna
-    subplot(3,3,[7,9]);
-    plot(answer.date, answer.profit);
+    subplot(3,3,7);
+    plot(answer.date, answer.profit, answer.date, answer.holdProfit);
     title('Bendras pelnas');
     ylabel('Pelnas');
     xlabel('Laikas');
-    
+    legend('Optimized profit', 'Not optimized profit', 'Location', 'southeast');
     matrixPlot(modifiedData,files);
 end
